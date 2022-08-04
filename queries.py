@@ -33,7 +33,9 @@ class APIQueriesHelper:
     def create_user(self, user_data: dict) -> dict:
         url = self.url + "users"
         user_creation_request = requests.post(url, data=user_data)
-        return create_return_data(user_creation_request)
+        result = create_return_data(user_creation_request)
+        result["response_time"] = user_creation_request.elapsed.total_seconds()
+        return result
 
     def update_user(self, user_id: str, user_data: dict) -> dict:
         url = self.url + "users/" + user_id

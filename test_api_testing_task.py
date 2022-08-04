@@ -72,6 +72,8 @@ def test_user_creation_and_modifying(name, job):
     queries = Queries()
     user_creation_response = queries.create_user(user_data={"name": name, "job": job})
     assert user_creation_response["code"] == 201, "User wasn't created"
+    response_time = user_creation_response["response_time"]
+    print("Response time in seconds: ", response_time)
     user_id = user_creation_response["body"]["id"]
     new_job = "zion resident"
     updated_user_data = {"name": name, "job": new_job}
